@@ -34,7 +34,7 @@ export function CodeBlock({
   return (
     <div className="rounded-lg border border-border/60 overflow-hidden">
       <div
-        className="flex items-center justify-between bg-secondary/40 px-3 py-1.5 cursor-pointer"
+        className="flex items-center justify-between bg-secondary/40 px-2.5 sm:px-3 py-2 sm:py-1.5 cursor-pointer"
         onClick={() => collapsible && setOpen(!open)}
       >
         <div className="flex items-center gap-2">

@@ -173,3 +173,50 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--foreground);
 }
+
+/* Thin scrollbar for horizontal tab strip */
+.scrollbar-thin::-webkit-scrollbar {
+  height: 3px;
+}
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--muted-foreground) 40%, transparent);
+  border-radius: 2px;
+}
+.scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--muted-foreground) 40%, transparent) transparent;
+}
+
+/* Mobile touch optimizations */
+@media (pointer: coarse) {
+  button, a, [role="tab"], input[type="color"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  [data-slot="slider-thumb"] {
+    width: 28px !important;
+    height: 28px !important;
+  }
+  [data-slot="slider-track"] {
+    height: 12px !important;
+  }
+}
+
+/* Responsive typography */
+@media (max-width: 640px) {
+  .gradient-text {
+    font-size: 0.875rem;
+  }
+}
+
+/* Safe area for notched devices (iPhone etc.) */
+@supports (padding: env(safe-area-inset-bottom)) {
+  body {
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}

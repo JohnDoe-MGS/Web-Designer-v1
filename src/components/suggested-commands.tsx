@@ -23,27 +23,27 @@ function CommandItem({ command, description, tag }: Command) {
 
   return (
     <motion.div
-      className="group flex items-start gap-3 rounded-lg border border-border/50 bg-card/50 p-3 hover:bg-secondary/30 transition-colors"
+      className="group flex items-start gap-2 sm:gap-3 rounded-lg border border-border/50 bg-card/50 p-2.5 sm:p-3 hover:bg-secondary/30 active:bg-secondary/40 transition-colors"
       whileHover={{ x: 4 }}
     >
       <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-secondary">
         <Terminal className="h-3.5 w-3.5 text-primary" />
       </div>
       <div className="min-w-0 flex-1 space-y-1">
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
           <Badge variant="secondary" className="text-[9px] px-1.5">
             {tag}
           </Badge>
           <p className="text-[10px] text-muted-foreground">{description}</p>
         </div>
-        <code className="block text-[11px] font-mono text-foreground/80 break-all leading-relaxed">
+        <code className="block text-[10px] sm:text-[11px] font-mono text-foreground/80 break-all leading-relaxed">
           {command}
         </code>
       </div>
       <Button
         variant="ghost"
         size="sm"
-        className="h-7 w-7 shrink-0 p-0 opacity-0 group-hover:opacity-100 transition-opacity"
+        className="h-7 w-7 shrink-0 p-0 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity"
         onClick={handleCopy}
       >
         {copied ? (

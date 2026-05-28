@@ -82,17 +82,19 @@ export default function HomePage() {
         {/* Main Content */}
         <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
           <Tabs defaultValue="cores" className="flex! flex-col! gap-6">
-            <div className="flex justify-center">
-              <TabsList className="glass-card w-auto">
-                <TabsTrigger value="cores">Paleta de Cores</TabsTrigger>
-                <TabsTrigger value="tipografia">Tipografia</TabsTrigger>
-                <TabsTrigger value="gradientes">Gradientes</TabsTrigger>
-                <TabsTrigger value="preview">Preview</TabsTrigger>
-                <TabsTrigger value="acessibilidade">WCAG</TabsTrigger>
-                <TabsTrigger value="config">Config</TabsTrigger>
-                <TabsTrigger value="manifesto">Manifesto</TabsTrigger>
-                <TabsTrigger value="animacoes">Animações</TabsTrigger>
-              </TabsList>
+            <div className="-mx-4 sm:mx-0 overflow-x-auto scrollbar-thin pb-1">
+              <div className="flex justify-center min-w-max px-4 sm:px-0">
+                <TabsList className="glass-card w-auto">
+                  <TabsTrigger value="cores">Cores</TabsTrigger>
+                  <TabsTrigger value="tipografia">Tipografia</TabsTrigger>
+                  <TabsTrigger value="gradientes">Gradientes</TabsTrigger>
+                  <TabsTrigger value="preview">Preview</TabsTrigger>
+                  <TabsTrigger value="acessibilidade">WCAG</TabsTrigger>
+                  <TabsTrigger value="config">Config</TabsTrigger>
+                  <TabsTrigger value="manifesto">Manifesto</TabsTrigger>
+                  <TabsTrigger value="animacoes">Animações</TabsTrigger>
+                </TabsList>
+              </div>
             </div>
 
             <TabsContent value="cores" className="space-y-6">

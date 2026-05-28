@@ -60,24 +60,24 @@ export function FontScalePreview({ fontScale, fontFamily }: FontScalePreviewProp
           {SCALE_ITEMS.map((item, i) => (
             <motion.div
               key={item.key}
-              className="flex items-baseline gap-4 rounded-lg px-3 py-2 hover:bg-secondary/50 group"
+              className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4 rounded-lg px-3 py-2 hover:bg-secondary/50 group"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: i * 0.06, duration: 0.4 }}
             >
-              <div className="w-20 shrink-0">
+              <div className="flex sm:flex-col items-center sm:items-start gap-2 sm:gap-0 sm:w-20 shrink-0">
                 <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider">
                   {item.label}
                 </span>
-                <div className="text-[10px] text-muted-foreground/60">
+                <span className="text-[10px] text-muted-foreground/60">
                   {fontScale[item.key]}
-                </div>
+                </span>
               </div>
               <div className="min-w-0 flex-1 overflow-hidden">
                 <span
                   className="block truncate text-foreground group-hover:gradient-text"
                   style={{
-                    fontSize: fontScale[item.key],
+                    fontSize: `clamp(0.75rem, ${parseFloat(fontScale[item.key]) * 0.7}rem + 0.5vw, ${fontScale[item.key]})`,
                     fontWeight: item.weight,
                     fontFamily: `var(--font-montserrat), ${fontFamily}, sans-serif`,
                     lineHeight: 1.3,

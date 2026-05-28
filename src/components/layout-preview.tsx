@@ -144,7 +144,7 @@ export function LayoutPreview({ palette, gradient }: LayoutPreviewProps) {
             </motion.div>
 
             {/* Cards Grid */}
-            <div className="grid grid-cols-3 gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
               {[0, 1, 2].map((i) => (
                 <motion.div
                   key={i}

@@ -156,18 +156,18 @@ export function ManifestoPage() {
         transition={{ duration: 0.5 }}
       >
         <Card className="glass-card overflow-hidden">
-          <div className="relative p-8 sm:p-12">
+          <div className="relative p-5 sm:p-8 md:p-12">
             <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5" />
             <div className="relative space-y-4">
               <div className="flex items-center gap-3">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary glow-accent">
-                  <BookOpen className="h-6 w-6 text-primary-foreground" />
+                <div className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-xl bg-primary glow-accent shrink-0">
+                  <BookOpen className="h-5 w-5 sm:h-6 sm:w-6 text-primary-foreground" />
                 </div>
                 <div>
-                  <h2 className="text-2xl font-bold tracking-tight gradient-text">
+                  <h2 className="text-xl sm:text-2xl font-bold tracking-tight gradient-text">
                     Manifesto
                   </h2>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-xs sm:text-sm text-muted-foreground">
                     Design System Orchestrator &middot; Ponte Claude Code
                   </p>
                 </div>
@@ -203,7 +203,7 @@ export function ManifestoPage() {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
               {principles.map((p, i) => (
                 <motion.div
                   key={p.title}
@@ -211,11 +211,11 @@ export function ManifestoPage() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.15 + i * 0.06, duration: 0.4 }}
                 >
-                  <div className="flex gap-3 rounded-lg border border-border/50 bg-card/50 p-4 h-full">
-                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-secondary">
+                  <div className="flex gap-3 rounded-lg border border-border/50 bg-card/50 p-3 sm:p-4 h-full">
+                    <div className="flex h-8 w-8 sm:h-9 sm:w-9 shrink-0 items-center justify-center rounded-lg bg-secondary">
                       <p.icon className="h-4 w-4 text-primary" />
                     </div>
-                    <div className="space-y-1">
+                    <div className="space-y-1 min-w-0">
                       <h3 className="text-sm font-semibold text-foreground">{p.title}</h3>
                       <p className="text-[11px] leading-relaxed text-muted-foreground">
                         {p.description}
@@ -243,11 +243,11 @@ export function ManifestoPage() {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid gap-4 sm:grid-cols-2">
+            <div className="grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-2">
               {howItWorksSteps.map((step, i) => (
                 <motion.div
                   key={step.number}
-                  className="flex gap-4 rounded-lg border border-border/50 bg-card/50 p-4"
+                  className="flex gap-3 sm:gap-4 rounded-lg border border-border/50 bg-card/50 p-3 sm:p-4"
                   initial={{ opacity: 0, x: -15 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.3 + i * 0.08 }}
@@ -285,7 +285,7 @@ export function ManifestoPage() {
           </CardHeader>
           <CardContent className="space-y-4">
             {/* Visual Pipeline */}
-            <div className="flex flex-wrap items-center justify-center gap-2 py-4">
+            <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 py-3 sm:py-4">
               {["UI Orchestrator", "JSON Config", "Claude Code CLI", "tailwind.config.js"].map(
                 (step, i) => (
                   <div key={step} className="flex items-center gap-2">
@@ -399,7 +399,7 @@ export function ManifestoPage() {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-2.5 sm:gap-3 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
               {[
                 { name: "Next.js 16", desc: "App Router com Turbopack para compilação ultrarrápida" },
                 { name: "Tailwind CSS v4", desc: "@theme inline e @custom-variant para tokens nativos" },
@@ -448,6 +448,41 @@ export function ManifestoPage() {
             command: 'claude "Integre o Design System Orchestrator com CI/CD: adicione validação de contraste WCAG no pipeline de build"',
             description: "Automatiza verificação de acessibilidade no CI",
             tag: "CI/CD",
+          },
+          {
+            command: 'claude "Crie um componente ThemeProvider com next-themes, suportando light/dark com transição suave de 300ms e persistência em localStorage"',
+            description: "Implementa troca de tema com persistência",
+            tag: "Tema",
+          },
+          {
+            command: 'claude "Gere um design-tokens.ts com tipos TypeScript para ColorPalette, FontScale e GradientConfig, incluindo paletas padrão light e dark"',
+            description: "Cria a camada tipada de tokens do sistema",
+            tag: "TypeScript",
+          },
+          {
+            command: 'claude "Adicione Framer Motion em todos os componentes de card e seção com fade-in-up staggered (delay incremental de 0.06s)"',
+            description: "Aplica animações de entrada coordenadas",
+            tag: "Motion",
+          },
+          {
+            command: 'claude "Configure o Tailwind CSS v4 com @theme inline consumindo as CSS custom properties do design system para todas as cores, fontes e border-radius"',
+            description: "Integra tokens CSS com Tailwind v4",
+            tag: "Tailwind",
+          },
+          {
+            command: 'claude "Crie um layout responsivo com glass-card (backdrop-blur), gradientes e partículas tsparticles, seguindo a regra 60-30-10 em todas as seções"',
+            description: "Monta o layout completo com efeitos visuais",
+            tag: "Layout",
+          },
+          {
+            command: 'claude "Adicione meta tags Open Graph, favicon e manifest.json para tornar o projeto PWA-ready com título e descrição do Design System Orchestrator"',
+            description: "Prepara o projeto para SEO e instalação como PWA",
+            tag: "PWA",
+          },
+          {
+            command: 'claude "Audite todo o projeto e gere um relatório de consistência: tokens não utilizados, cores hardcoded, componentes sem dark mode e violações WCAG"',
+            description: "Gera relatório completo de conformidade do design system",
+            tag: "Auditoria",
           },
         ]} />
       </motion.div>

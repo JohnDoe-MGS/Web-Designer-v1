@@ -34,12 +34,12 @@ function ColorSwatch({
 }) {
   return (
     <motion.div
-      className="swatch-lift flex flex-col items-center gap-2"
+      className="swatch-lift flex flex-col items-center gap-1.5 sm:gap-2"
       whileHover={{ y: -4 }}
     >
       <div className="relative group">
         <div
-          className="h-16 w-16 rounded-xl border border-border shadow-lg cursor-pointer"
+          className="h-12 w-12 sm:h-16 sm:w-16 rounded-xl border border-border shadow-lg cursor-pointer"
           style={{ backgroundColor: color }}
         />
         <input
@@ -55,8 +55,8 @@ function ColorSwatch({
           </Badge>
         </div>
       </div>
-      <span className="text-xs text-muted-foreground font-medium">{label}</span>
-      <span className="text-[10px] font-mono text-muted-foreground uppercase">
+      <span className="text-[10px] sm:text-xs text-muted-foreground font-medium text-center">{label}</span>
+      <span className="text-[9px] sm:text-[10px] font-mono text-muted-foreground uppercase">
         {color}
       </span>
     </motion.div>
@@ -87,7 +87,7 @@ function GrayPresetSelector({
   onSelect: (preset: keyof typeof GRAY_PRESETS) => void
 }) {
   return (
-    <div className="flex gap-2">
+    <div className="flex flex-wrap gap-2">
       {(Object.keys(GRAY_PRESETS) as Array<keyof typeof GRAY_PRESETS>).map((name) => (
         <motion.button
           key={name}
@@ -230,7 +230,7 @@ export function ColorPaletteManager({
             <Droplets className="h-4 w-4 text-amber-500" />
             <Label className="text-sm font-semibold">Tema Claro</Label>
           </div>
-          <div className="flex flex-wrap gap-4">
+          <div className="grid grid-cols-3 sm:grid-cols-5 gap-3 sm:gap-4">
             <ColorSwatch
               color={lightPalette.primary}
               label="Base (60%)"
@@ -274,7 +274,7 @@ export function ColorPaletteManager({
             <Droplets className="h-4 w-4 text-blue-400" />
             <Label className="text-sm font-semibold">Tema Escuro</Label>
           </div>
-          <div className="flex flex-wrap gap-4">
+          <div className="grid grid-cols-3 sm:grid-cols-5 gap-3 sm:gap-4">
             <ColorSwatch
               color={darkPalette.primary}
               label="Base (60%)"

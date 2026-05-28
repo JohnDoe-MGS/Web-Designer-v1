@@ -77,30 +77,32 @@ function ContrastRow({ pair }: { pair: ContrastPair }) {
 
   return (
     <motion.div
-      className="flex items-center gap-3 rounded-lg px-3 py-2 hover:bg-secondary/30"
+      className="flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-3 rounded-lg px-2.5 sm:px-3 py-2 hover:bg-secondary/30"
       initial={{ opacity: 0, x: -10 }}
       animate={{ opacity: 1, x: 0 }}
     >
-      {passed ? (
-        <CheckCircle className="h-4 w-4 shrink-0 text-emerald-400" />
-      ) : (
-        <AlertTriangle className="h-4 w-4 shrink-0 text-red-400" />
-      )}
-      <div className="flex-1 min-w-0">
-        <div className="text-xs font-medium text-foreground truncate">{pair.name}</div>
-        <div className="flex items-center gap-2 mt-0.5">
-          <div className="flex items-center gap-1">
-            <div className="h-3 w-3 rounded border border-border" style={{ backgroundColor: pair.fg }} />
-            <span className="text-[9px] font-mono text-muted-foreground">{pair.fg}</span>
-          </div>
-          <span className="text-[9px] text-muted-foreground">/</span>
-          <div className="flex items-center gap-1">
-            <div className="h-3 w-3 rounded border border-border" style={{ backgroundColor: pair.bg }} />
-            <span className="text-[9px] font-mono text-muted-foreground">{pair.bg}</span>
+      <div className="flex items-center gap-2 sm:gap-3 flex-1 min-w-0">
+        {passed ? (
+          <CheckCircle className="h-4 w-4 shrink-0 text-emerald-400" />
+        ) : (
+          <AlertTriangle className="h-4 w-4 shrink-0 text-red-400" />
+        )}
+        <div className="flex-1 min-w-0">
+          <div className="text-xs font-medium text-foreground truncate">{pair.name}</div>
+          <div className="flex items-center gap-2 mt-0.5">
+            <div className="flex items-center gap-1">
+              <div className="h-3 w-3 rounded border border-border" style={{ backgroundColor: pair.fg }} />
+              <span className="text-[9px] font-mono text-muted-foreground">{pair.fg}</span>
+            </div>
+            <span className="text-[9px] text-muted-foreground">/</span>
+            <div className="flex items-center gap-1">
+              <div className="h-3 w-3 rounded border border-border" style={{ backgroundColor: pair.bg }} />
+              <span className="text-[9px] font-mono text-muted-foreground">{pair.bg}</span>
+            </div>
           </div>
         </div>
       </div>
-      <div className="flex items-center gap-2 shrink-0">
+      <div className="flex items-center gap-2 shrink-0 pl-6 sm:pl-0">
         <span className="text-xs font-mono text-muted-foreground">{ratio.toFixed(2)}:1</span>
         <Badge className={`text-[10px] px-1.5 border ${badgeColor[level]}`}>
           {level}

@@ -94,7 +94,7 @@ export function GradientEditor({ gradient, onUpdate }: GradientEditorProps) {
         />
 
         {/* Color Stops */}
-        <div className="flex flex-wrap gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-6">
           <GradientStop
             label="Início"
             color={gradient.from}
