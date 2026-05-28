@@ -42,7 +42,7 @@ const ANIMATIONS: AnimationDemo[] = [
   },
   {
     name: "Scale Bounce",
-    description: "Escala com efeito elastico",
+    description: "Escala com efeito elástico",
     code: `<motion.div
   initial={{ scale: 0 }}
   animate={{ scale: 1 }}
@@ -70,7 +70,7 @@ const ANIMATIONS: AnimationDemo[] = [
   },
   {
     name: "Rotate In",
-    description: "Entrada com rotacao e escala",
+    description: "Entrada com rotação e escala",
     code: `<motion.div
   initial={{ opacity: 0, rotate: -180, scale: 0 }}
   animate={{ opacity: 1, rotate: 0, scale: 1 }}
@@ -84,7 +84,7 @@ const ANIMATIONS: AnimationDemo[] = [
   },
   {
     name: "Hover Lift",
-    description: "Elevacao ao passar o mouse",
+    description: "Elevação ao passar o mouse",
     code: `<motion.div
   whileHover={{ y: -8, scale: 1.02 }}
   whileTap={{ scale: 0.98 }}
@@ -98,7 +98,7 @@ const ANIMATIONS: AnimationDemo[] = [
   },
   {
     name: "Pulse Glow",
-    description: "Pulso luminoso continuo para destaque",
+    description: "Pulso luminoso contínuo para destaque",
     code: `<motion.div
   animate={{
     boxShadow: [
@@ -124,7 +124,7 @@ const CLAUDE_COMMANDS = [
   {
     command:
       'claude "Aplique a paleta 60-30-10 do ds-orchestrator-config.json no meu projeto Tailwind"',
-    description: "Aplica toda a configuracao do Orchestrator ao projeto",
+    description: "Aplica toda a configuração do Orchestrator ao projeto",
     tag: "Setup",
   },
   {
@@ -142,31 +142,31 @@ const CLAUDE_COMMANDS = [
   {
     command:
       'claude "Refatore a tipografia do projeto para usar a escala Montserrat definida no design system"',
-    description: "Aplica a escala tipografica em todo o projeto",
+    description: "Aplica a escala tipográfica em todo o projeto",
     tag: "Typography",
   },
   {
     command:
-      'claude "Adicione animacoes Framer Motion com fade-in-up em todos os cards e secoes"',
-    description: "Aplica animacoes de entrada nos componentes",
+      'claude "Adicione animações Framer Motion com fade-in-up em todos os cards e seções"',
+    description: "Aplica animações de entrada nos componentes",
     tag: "Motion",
   },
   {
     command:
-      'claude "Gere um componente de glass-card reutilizavel com backdrop-blur e border sutil"',
+      'claude "Gere um componente de glass-card reutilizável com backdrop-blur e border sutil"',
     description: "Cria componente glassmorphism padronizado",
     tag: "Component",
   },
   {
     command:
-      'claude "Audite o projeto e liste todos os locais onde as cores nao seguem a regra 60-30-10"',
-    description: "Identifica violacoes da regra de distribuicao de cores",
+      'claude "Audite o projeto e liste todos os locais onde as cores não seguem a regra 60-30-10"',
+    description: "Identifica violações da regra de distribuição de cores",
     tag: "Audit",
   },
   {
     command:
-      'claude "Adicione particulas interativas com tsparticles no background do hero"',
-    description: "Implementa background animado com particulas",
+      'claude "Adicione partículas interativas com tsparticles no background do hero"',
+    description: "Implementa background animado com partículas",
     tag: "Particles",
   },
 ]
@@ -274,7 +274,7 @@ export function AnimationsPage() {
           <CardHeader className="pb-3">
             <CardTitle className="flex items-center gap-2 text-lg">
               <MousePointerClick className="h-5 w-5 text-primary" />
-              Animacoes Framer Motion
+              Animações Framer Motion
               <Badge variant="secondary" className="text-[10px] ml-auto">
                 {ANIMATIONS.length} presets
               </Badge>
@@ -322,7 +322,7 @@ export function AnimationsPage() {
               0 0 40px hsl(var(--primary) / 0.1);
 }
 
-/* Transicao suave entre temas */
+/* Transição suave entre temas */
 * {
   transition: background-color 300ms ease,
               border-color 300ms ease,

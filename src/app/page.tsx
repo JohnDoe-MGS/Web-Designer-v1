@@ -91,7 +91,7 @@ export default function HomePage() {
                 <TabsTrigger value="acessibilidade">WCAG</TabsTrigger>
                 <TabsTrigger value="config">Config</TabsTrigger>
                 <TabsTrigger value="manifesto">Manifesto</TabsTrigger>
-                <TabsTrigger value="animacoes">Animacoes</TabsTrigger>
+                <TabsTrigger value="animacoes">Animações</TabsTrigger>
               </TabsList>
             </div>
 

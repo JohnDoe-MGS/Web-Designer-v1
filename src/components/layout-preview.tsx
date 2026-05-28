@@ -5,6 +5,7 @@ import { motion } from "framer-motion"
 import { Layout, Monitor } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { CodeBlock } from "@/components/code-block"
+import { SuggestedCommands } from "@/components/suggested-commands"
 import type { ColorPalette, GradientConfig } from "@/lib/design-tokens"
 
 interface LayoutPreviewProps {
@@ -29,7 +30,7 @@ function LayoutCodePreview({ palette, gradient }: LayoutPreviewProps) {
     <p style={{ color: "${palette.muted}" }}>...</p>
     {/* CTA — 10% Accent */}
     <button style={{ background: "${grad}" }}>
-      Comecar
+      Começar
     </button>
   </section>
 
@@ -208,6 +209,19 @@ export function LayoutPreview({ palette, gradient }: LayoutPreviewProps) {
         </motion.div>
 
         <LayoutCodePreview palette={palette} gradient={gradient} />
+
+        <SuggestedCommands commands={[
+          {
+            command: 'claude "Crie um layout responsivo com header, hero, grid de cards e footer seguindo a regra 60-30-10 do design system"',
+            description: "Gera estrutura de página completa",
+            tag: "Layout",
+          },
+          {
+            command: 'claude "Refatore o layout existente para aplicar as zonas 60-30-10: 60% cor base nas seções principais, 30% secundária na navegação, 10% acento nos CTAs"',
+            description: "Aplica distribuição de cores ao layout",
+            tag: "60-30-10",
+          },
+        ]} />
       </CardContent>
     </Card>
   )

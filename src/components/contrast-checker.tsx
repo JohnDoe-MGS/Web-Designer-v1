@@ -6,6 +6,7 @@ import { Shield, AlertTriangle, CheckCircle } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { CodeBlock } from "@/components/code-block"
+import { SuggestedCommands } from "@/components/suggested-commands"
 import type { ColorPalette } from "@/lib/design-tokens"
 import { contrastRatio, wcagLevel } from "@/lib/utils"
 
@@ -39,7 +40,7 @@ function buildPairs(palette: ColorPalette, theme: string): ContrastPair[] {
       bgLabel: "Primary",
     },
     {
-      name: `${theme}: Texto sobre Secundaria (30%)`,
+      name: `${theme}: Texto sobre Secundária (30%)`,
       fg: palette.foreground,
       bg: palette.secondary,
       fgLabel: "Foreground",
@@ -152,6 +153,24 @@ export function ContrastChecker({ lightPalette, darkPalette }: ContrastCheckerPr
         </div>
 
         <WcagCodePreview pairs={allPairs} />
+
+        <SuggestedCommands commands={[
+          {
+            command: 'claude "Corrija todos os contrastes WCAG AA nos componentes, usando as cores do design system para garantir acessibilidade"',
+            description: "Corrige automaticamente problemas de contraste",
+            tag: "WCAG",
+          },
+          {
+            command: 'claude "Adicione atributos aria-label e roles ARIA em todos os componentes interativos do projeto"',
+            description: "Melhora acessibilidade semântica",
+            tag: "ARIA",
+          },
+          {
+            command: 'claude "Audite o projeto com critérios WCAG 2.1 AA e gere um relatório com todas as violações encontradas"',
+            description: "Gera relatório completo de acessibilidade",
+            tag: "Relatório",
+          },
+        ]} />
       </CardContent>
     </Card>
   )

@@ -19,7 +19,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Design System Orchestrator",
-  description: "Painel visual para gerenciar consistencia estetica com Tailwind, shadcn/ui e integracao Claude Code",
+  description: "Painel visual para gerenciar consistência estética com Tailwind, shadcn/ui e integração Claude Code",
 }
 
 export default function RootLayout({

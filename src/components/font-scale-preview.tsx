@@ -5,6 +5,7 @@ import { motion } from "framer-motion"
 import { Type } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { CodeBlock } from "@/components/code-block"
+import { SuggestedCommands } from "@/components/suggested-commands"
 import type { FontScale } from "@/lib/design-tokens"
 
 interface FontScalePreviewProps {
@@ -16,8 +17,8 @@ const SCALE_ITEMS: { key: keyof FontScale; label: string; weight: number; sample
   { key: "display", label: "Display", weight: 800, sample: "Orchestrator" },
   { key: "h1", label: "Heading 1", weight: 700, sample: "Design System" },
   { key: "h2", label: "Heading 2", weight: 600, sample: "Componentes visuais" },
-  { key: "h3", label: "Heading 3", weight: 600, sample: "Hierarquia tipografica" },
-  { key: "body", label: "Body", weight: 400, sample: "Texto principal de conteudo para leitura confortavel em parágrafos longos." },
+  { key: "h3", label: "Heading 3", weight: 600, sample: "Hierarquia tipográfica" },
+  { key: "body", label: "Body", weight: 400, sample: "Texto principal de conteúdo para leitura confortável em parágrafos longos." },
   { key: "small", label: "Small", weight: 400, sample: "Texto auxiliar e labels de formulário" },
   { key: "caption", label: "Caption", weight: 500, sample: "METADADOS E LEGENDAS" },
 ]
@@ -51,7 +52,7 @@ export function FontScalePreview({ fontScale, fontFamily }: FontScalePreviewProp
       <CardHeader className="pb-3">
         <CardTitle className="flex items-center gap-2 text-lg">
           <Type className="h-5 w-5 text-primary" />
-          Escala Tipografica — {fontFamily}
+          Escala Tipográfica — {fontFamily}
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
@@ -90,6 +91,19 @@ export function FontScalePreview({ fontScale, fontFamily }: FontScalePreviewProp
         </div>
 
         <FontScaleCodePreview fontScale={fontScale} fontFamily={fontFamily} />
+
+        <SuggestedCommands commands={[
+          {
+            command: 'claude "Refatore a tipografia do projeto para usar a escala Montserrat definida no design system, substituindo font-sizes arbitrários"',
+            description: "Padroniza a tipografia em todo o projeto",
+            tag: "Tipografia",
+          },
+          {
+            command: 'claude "Adicione classes utilitárias de tipografia (text-display, text-h1, text-h2) no Tailwind config baseadas na escala do design system"',
+            description: "Cria classes semânticas de texto",
+            tag: "Classes",
+          },
+        ]} />
       </CardContent>
     </Card>
   )

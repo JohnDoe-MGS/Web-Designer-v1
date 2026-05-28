@@ -5,6 +5,7 @@ import { motion } from "framer-motion"
 import { Blend, RotateCw } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { CodeBlock } from "@/components/code-block"
+import { SuggestedCommands } from "@/components/suggested-commands"
 import { Slider } from "@/components/ui/slider"
 import { Label } from "@/components/ui/label"
 import type { GradientConfig } from "@/lib/design-tokens"
@@ -95,7 +96,7 @@ export function GradientEditor({ gradient, onUpdate }: GradientEditorProps) {
         {/* Color Stops */}
         <div className="flex flex-wrap gap-6">
           <GradientStop
-            label="Inicio"
+            label="Início"
             color={gradient.from}
             onChange={(v) => onUpdate("from", v)}
           />
@@ -116,7 +117,7 @@ export function GradientEditor({ gradient, onUpdate }: GradientEditorProps) {
           <div className="flex items-center justify-between">
             <Label className="text-xs text-muted-foreground flex items-center gap-1.5">
               <RotateCw className="h-3 w-3" />
-              Angulo
+              Ângulo
             </Label>
             <span className="text-xs font-mono text-foreground">{gradient.angle}°</span>
           </div>
@@ -132,6 +133,19 @@ export function GradientEditor({ gradient, onUpdate }: GradientEditorProps) {
 
         {/* Code Preview */}
         <GradientCodePreview gradient={gradient} css={gradientCSS} />
+
+        <SuggestedCommands commands={[
+          {
+            command: 'claude "Aplique o gradiente do design system em todos os botões CTA e elementos de destaque do projeto"',
+            description: "Aplica gradiente nos CTAs do projeto",
+            tag: "Gradiente",
+          },
+          {
+            command: 'claude "Crie uma classe utilitária .gradient-brand no Tailwind com os stops de cor do design system"',
+            description: "Gera classe reutilizável de gradiente",
+            tag: "Classe",
+          },
+        ]} />
       </CardContent>
     </Card>
   )

@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Label } from "@/components/ui/label"
 import { CodeBlock } from "@/components/code-block"
+import { SuggestedCommands } from "@/components/suggested-commands"
 import type { ColorPalette } from "@/lib/design-tokens"
 import { GRAY_PRESETS, ACCENT_PRESETS } from "@/lib/design-tokens"
 import { contrastRatio, wcagLevel } from "@/lib/utils"
@@ -314,7 +315,7 @@ export function ColorPaletteManager({
         {/* 60-30-10 Visual Bar */}
         <div className="space-y-2">
           <Label className="text-xs text-muted-foreground uppercase tracking-wider">
-            Distribuicao Visual
+            Distribuição Visual
           </Label>
           <div className="flex h-6 w-full overflow-hidden rounded-full">
             <motion.div
@@ -343,6 +344,25 @@ export function ColorPaletteManager({
 
         {/* Code Preview */}
         <PaletteCodePreview light={lightPalette} dark={darkPalette} />
+
+        {/* Comandos Sugeridos */}
+        <SuggestedCommands commands={[
+          {
+            command: 'claude "Aplique a paleta 60-30-10 do ds-orchestrator-config.json no meu projeto Tailwind, atualizando as CSS variables em globals.css"',
+            description: "Aplica a paleta completa ao projeto",
+            tag: "Paleta",
+          },
+          {
+            command: 'claude "Gere variantes de cor (hover, active, disabled) para cada token do design system, mantendo a proporção 60-30-10"',
+            description: "Cria estados derivados automaticamente",
+            tag: "Variantes",
+          },
+          {
+            command: 'claude "Audite todas as cores hardcoded no projeto e substitua pelos tokens do design system"',
+            description: "Remove cores hardcoded do código",
+            tag: "Auditoria",
+          },
+        ]} />
       </CardContent>
     </Card>
   )

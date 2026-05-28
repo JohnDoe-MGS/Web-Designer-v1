@@ -6,6 +6,7 @@ import { FileJson, Copy, Check, Terminal, Download } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import { SuggestedCommands } from "@/components/suggested-commands"
 import type { DesignSystemConfig } from "@/lib/design-tokens"
 import { generateTailwindConfig } from "@/lib/design-tokens"
 
@@ -55,12 +56,12 @@ export function ConfigGenerator({ generateConfig }: ConfigGeneratorProps) {
       <CardHeader className="pb-3">
         <CardTitle className="flex items-center gap-2 text-lg">
           <FileJson className="h-5 w-5 text-primary" />
-          Gerador de Configuracao
+          Gerador de Configuração
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
         <p className="text-sm text-muted-foreground">
-          Gere o arquivo JSON de configuracao para integrar com o{" "}
+          Gere o arquivo JSON de configuração para integrar com o{" "}
           <span className="font-semibold text-foreground">Claude Code</span> e atualizar
           automaticamente seu <code className="text-xs bg-secondary px-1.5 py-0.5 rounded">tailwind.config.js</code>.
         </p>
@@ -68,7 +69,7 @@ export function ConfigGenerator({ generateConfig }: ConfigGeneratorProps) {
         <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
           <Button onClick={handleGenerate} className="w-full glow-accent" size="lg">
             <FileJson className="mr-2 h-4 w-4" />
-            Gerar Configuracao JSON
+            Gerar Configuração JSON
           </Button>
         </motion.div>
 
@@ -111,7 +112,7 @@ export function ConfigGenerator({ generateConfig }: ConfigGeneratorProps) {
                 <p className="text-xs text-muted-foreground leading-relaxed">
                   Cole o comando no terminal para que o Claude Code atualize seu{" "}
                   <code className="bg-secondary px-1 rounded">tailwind.config.js</code>{" "}
-                  com base nesta configuracao, corrigindo contrastes WCAG AA automaticamente.
+                  com base nesta configuração, corrigindo contrastes WCAG AA automaticamente.
                 </p>
               </div>
 
@@ -124,6 +125,19 @@ export function ConfigGenerator({ generateConfig }: ConfigGeneratorProps) {
             </motion.div>
           )}
         </AnimatePresence>
+
+        <SuggestedCommands commands={[
+          {
+            command: 'claude "Leia o arquivo ds-orchestrator-config.json e atualize o tailwind.config.js com todas as cores, tipografia e gradientes definidos"',
+            description: "Aplica a configuração completa ao Tailwind",
+            tag: "Config",
+          },
+          {
+            command: 'claude "Compare o tailwind.config.js atual com o JSON do Orchestrator e liste as diferenças"',
+            description: "Verifica divergências entre config e projeto",
+            tag: "Diff",
+          },
+        ]} />
       </CardContent>
     </Card>
   )
