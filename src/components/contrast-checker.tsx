@@ -1,9 +1,11 @@
 "use client"
 
+import { useMemo } from "react"
 import { motion } from "framer-motion"
 import { Shield, AlertTriangle, CheckCircle } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import { CodeBlock } from "@/components/code-block"
 import type { ColorPalette } from "@/lib/design-tokens"
 import { contrastRatio, wcagLevel } from "@/lib/utils"
 
@@ -107,6 +109,20 @@ function ContrastRow({ pair }: { pair: ContrastPair }) {
   )
 }
 
+function WcagCodePreview({ pairs }: { pairs: ContrastPair[] }) {
+  const code = useMemo(() => {
+    const lines = pairs.map((p) => {
+      const ratio = contrastRatio(p.fg, p.bg)
+      const level = wcagLevel(ratio)
+      const status = level === "Fail" ? "FAIL" : "PASS"
+      return `/* ${status} ${level} ${ratio.toFixed(2)}:1 */\n.${p.name.replace(/[^a-zA-Z0-9]/g, "-").toLowerCase()} {\n  color: ${p.fg};\n  background-color: ${p.bg};\n}`
+    })
+    return lines.join("\n\n")
+  }, [pairs])
+
+  return <CodeBlock code={code} language="css" title="WCAG Audit" />
+}
+
 export function ContrastChecker({ lightPalette, darkPalette }: ContrastCheckerProps) {
   const lightPairs = buildPairs(lightPalette, "Claro")
   const darkPairs = buildPairs(darkPalette, "Escuro")
@@ -128,10 +144,14 @@ export function ContrastChecker({ lightPalette, darkPalette }: ContrastCheckerPr
           </Badge>
         </CardTitle>
       </CardHeader>
-      <CardContent className="space-y-1 max-h-80 overflow-y-auto">
-        {allPairs.map((pair, i) => (
-          <ContrastRow key={i} pair={pair} />
-        ))}
+      <CardContent className="space-y-4">
+        <div className="space-y-1 max-h-80 overflow-y-auto">
+          {allPairs.map((pair, i) => (
+            <ContrastRow key={i} pair={pair} />
+          ))}
+        </div>
+
+        <WcagCodePreview pairs={allPairs} />
       </CardContent>
     </Card>
   )

@@ -14,6 +14,8 @@ import { GradientEditor } from "@/components/gradient-editor"
 import { LayoutPreview } from "@/components/layout-preview"
 import { ContrastChecker } from "@/components/contrast-checker"
 import { ConfigGenerator } from "@/components/config-generator"
+import { ManifestoPage } from "@/components/manifesto-page"
+import { AnimationsPage } from "@/components/animations-page"
 import { useDesignSystem } from "@/hooks/use-design-system"
 
 export default function HomePage() {
@@ -88,6 +90,8 @@ export default function HomePage() {
                 <TabsTrigger value="preview">Preview</TabsTrigger>
                 <TabsTrigger value="acessibilidade">WCAG</TabsTrigger>
                 <TabsTrigger value="config">Config</TabsTrigger>
+                <TabsTrigger value="manifesto">Manifesto</TabsTrigger>
+                <TabsTrigger value="animacoes">Animacoes</TabsTrigger>
               </TabsList>
             </div>
 
@@ -167,6 +171,26 @@ export default function HomePage() {
                 transition={{ duration: 0.4 }}
               >
                 <ConfigGenerator generateConfig={ds.generateConfig} />
+              </motion.div>
+            </TabsContent>
+
+            <TabsContent value="manifesto">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4 }}
+              >
+                <ManifestoPage />
+              </motion.div>
+            </TabsContent>
+
+            <TabsContent value="animacoes">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4 }}
+              >
+                <AnimationsPage />
               </motion.div>
             </TabsContent>
           </Tabs>

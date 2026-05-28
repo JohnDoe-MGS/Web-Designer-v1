@@ -1,8 +1,10 @@
 "use client"
 
+import { useMemo } from "react"
 import { motion } from "framer-motion"
 import { Blend, RotateCw } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { CodeBlock } from "@/components/code-block"
 import { Slider } from "@/components/ui/slider"
 import { Label } from "@/components/ui/label"
 import type { GradientConfig } from "@/lib/design-tokens"
@@ -42,6 +44,32 @@ function GradientStop({
       </div>
     </div>
   )
+}
+
+function GradientCodePreview({ gradient, css }: { gradient: GradientConfig; css: string }) {
+  const code = useMemo(() => {
+    return `/* CSS */
+background: ${css};
+
+/* Tailwind CSS Classes */
+<div className="bg-gradient-to-r from-[${gradient.from}] via-[${gradient.via}] to-[${gradient.to}]"
+     style={{ "--tw-gradient-angle": "${gradient.angle}deg" }}>
+
+/* Tailwind Config */
+theme: {
+  extend: {
+    colors: {
+      gradient: {
+        from: "${gradient.from}",
+        via: "${gradient.via}",
+        to: "${gradient.to}",
+      }
+    }
+  }
+}`
+  }, [gradient, css])
+
+  return <CodeBlock code={code} language="css" title="CSS & Tailwind" />
 }
 
 export function GradientEditor({ gradient, onUpdate }: GradientEditorProps) {
@@ -102,15 +130,8 @@ export function GradientEditor({ gradient, onUpdate }: GradientEditorProps) {
           />
         </div>
 
-        {/* CSS Output */}
-        <div className="rounded-lg bg-secondary/50 p-3">
-          <span className="text-[10px] text-muted-foreground uppercase tracking-wider block mb-1">
-            CSS Output
-          </span>
-          <code className="text-xs font-mono text-foreground break-all">
-            background: {gradientCSS};
-          </code>
-        </div>
+        {/* Code Preview */}
+        <GradientCodePreview gradient={gradient} css={gradientCSS} />
       </CardContent>
     </Card>
   )

@@ -1,13 +1,48 @@
 "use client"
 
+import { useMemo } from "react"
 import { motion } from "framer-motion"
 import { Layout, Monitor } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { CodeBlock } from "@/components/code-block"
 import type { ColorPalette, GradientConfig } from "@/lib/design-tokens"
 
 interface LayoutPreviewProps {
   palette: ColorPalette
   gradient: GradientConfig
+}
+
+function LayoutCodePreview({ palette, gradient }: LayoutPreviewProps) {
+  const code = useMemo(() => {
+    const grad = `linear-gradient(${gradient.angle}deg, ${gradient.from}, ${gradient.via}, ${gradient.to})`
+    return `{/* Layout 60-30-10 */}
+<div style={{ backgroundColor: "${palette.background}" }}>
+  {/* Navbar — 30% Secondary */}
+  <nav style={{ backgroundColor: "${palette.secondary}" }}>
+    <Logo color="${palette.accent}" />
+    <NavLinks color="${palette.foreground}" />
+  </nav>
+
+  {/* Hero — 60% Primary */}
+  <section style={{ backgroundColor: "${palette.primary}" }}>
+    <h1 style={{ color: "${palette.foreground}" }}>...</h1>
+    <p style={{ color: "${palette.muted}" }}>...</p>
+    {/* CTA — 10% Accent */}
+    <button style={{ background: "${grad}" }}>
+      Comecar
+    </button>
+  </section>
+
+  {/* Cards Grid */}
+  <div className="grid grid-cols-3 gap-4">
+    <Card bg="${palette.primary}" border="${palette.border}" />
+    <Card bg="${palette.secondary}" border="${palette.border}" />
+    <Card bg="${palette.primary}" accent="${palette.accent}" />
+  </div>
+</div>`
+  }, [palette, gradient])
+
+  return <CodeBlock code={code} language="jsx" title="JSX Structure" />
 }
 
 export function LayoutPreview({ palette, gradient }: LayoutPreviewProps) {
@@ -171,6 +206,8 @@ export function LayoutPreview({ palette, gradient }: LayoutPreviewProps) {
             <div style={{ backgroundColor: palette.accent, width: "10%" }} />
           </div>
         </motion.div>
+
+        <LayoutCodePreview palette={palette} gradient={gradient} />
       </CardContent>
     </Card>
   )

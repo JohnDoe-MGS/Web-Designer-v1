@@ -1,8 +1,10 @@
 "use client"
 
+import { useMemo } from "react"
 import { motion } from "framer-motion"
 import { Type } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { CodeBlock } from "@/components/code-block"
 import type { FontScale } from "@/lib/design-tokens"
 
 interface FontScalePreviewProps {
@@ -20,6 +22,29 @@ const SCALE_ITEMS: { key: keyof FontScale; label: string; weight: number; sample
   { key: "caption", label: "Caption", weight: 500, sample: "METADADOS E LEGENDAS" },
 ]
 
+function FontScaleCodePreview({ fontScale, fontFamily }: FontScalePreviewProps) {
+  const code = useMemo(() => {
+    const entries = Object.entries(fontScale)
+      .map(([key, val]) => `    "${key}": "${val}"`)
+      .join(",\n")
+    return `// tailwind.config.js
+module.exports = {
+  theme: {
+    extend: {
+      fontFamily: {
+        sans: ["${fontFamily}", "ui-sans-serif", "system-ui"],
+      },
+      fontSize: {
+${entries}
+      },
+    },
+  },
+}`
+  }, [fontScale, fontFamily])
+
+  return <CodeBlock code={code} language="js" title="Tailwind Config" />
+}
+
 export function FontScalePreview({ fontScale, fontFamily }: FontScalePreviewProps) {
   return (
     <Card className="glass-card">
@@ -29,38 +54,42 @@ export function FontScalePreview({ fontScale, fontFamily }: FontScalePreviewProp
           Escala Tipografica — {fontFamily}
         </CardTitle>
       </CardHeader>
-      <CardContent className="space-y-1">
-        {SCALE_ITEMS.map((item, i) => (
-          <motion.div
-            key={item.key}
-            className="flex items-baseline gap-4 rounded-lg px-3 py-2 hover:bg-secondary/50 group"
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: i * 0.06, duration: 0.4 }}
-          >
-            <div className="w-20 shrink-0">
-              <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider">
-                {item.label}
-              </span>
-              <div className="text-[10px] text-muted-foreground/60">
-                {fontScale[item.key]}
+      <CardContent className="space-y-4">
+        <div className="space-y-1">
+          {SCALE_ITEMS.map((item, i) => (
+            <motion.div
+              key={item.key}
+              className="flex items-baseline gap-4 rounded-lg px-3 py-2 hover:bg-secondary/50 group"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: i * 0.06, duration: 0.4 }}
+            >
+              <div className="w-20 shrink-0">
+                <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider">
+                  {item.label}
+                </span>
+                <div className="text-[10px] text-muted-foreground/60">
+                  {fontScale[item.key]}
+                </div>
               </div>
-            </div>
-            <div className="min-w-0 flex-1 overflow-hidden">
-              <span
-                className="block truncate text-foreground group-hover:gradient-text"
-                style={{
-                  fontSize: fontScale[item.key],
-                  fontWeight: item.weight,
-                  fontFamily: `var(--font-montserrat), ${fontFamily}, sans-serif`,
-                  lineHeight: 1.3,
-                }}
-              >
-                {item.sample}
-              </span>
-            </div>
-          </motion.div>
-        ))}
+              <div className="min-w-0 flex-1 overflow-hidden">
+                <span
+                  className="block truncate text-foreground group-hover:gradient-text"
+                  style={{
+                    fontSize: fontScale[item.key],
+                    fontWeight: item.weight,
+                    fontFamily: `var(--font-montserrat), ${fontFamily}, sans-serif`,
+                    lineHeight: 1.3,
+                  }}
+                >
+                  {item.sample}
+                </span>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        <FontScaleCodePreview fontScale={fontScale} fontFamily={fontFamily} />
       </CardContent>
     </Card>
   )

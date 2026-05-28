@@ -1,10 +1,12 @@
 "use client"
 
+import { useMemo } from "react"
 import { motion } from "framer-motion"
 import { Palette, Droplets, Sparkles } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Label } from "@/components/ui/label"
+import { CodeBlock } from "@/components/code-block"
 import type { ColorPalette } from "@/lib/design-tokens"
 import { GRAY_PRESETS, ACCENT_PRESETS } from "@/lib/design-tokens"
 import { contrastRatio, wcagLevel } from "@/lib/utils"
@@ -133,6 +135,32 @@ function AccentPresetSelector({
       ))}
     </div>
   )
+}
+
+function PaletteCodePreview({ light, dark }: { light: ColorPalette; dark: ColorPalette }) {
+  const cssCode = useMemo(() => {
+    return `:root {
+  --color-primary: ${light.primary};
+  --color-secondary: ${light.secondary};
+  --color-accent: ${light.accent};
+  --color-background: ${light.background};
+  --color-foreground: ${light.foreground};
+  --color-muted: ${light.muted};
+  --color-border: ${light.border};
+}
+
+.dark {
+  --color-primary: ${dark.primary};
+  --color-secondary: ${dark.secondary};
+  --color-accent: ${dark.accent};
+  --color-background: ${dark.background};
+  --color-foreground: ${dark.foreground};
+  --color-muted: ${dark.muted};
+  --color-border: ${dark.border};
+}`
+  }, [light, dark])
+
+  return <CodeBlock code={cssCode} language="css" title="CSS Variables" />
 }
 
 export function ColorPaletteManager({
@@ -312,6 +340,9 @@ export function ColorPaletteManager({
             />
           </div>
         </div>
+
+        {/* Code Preview */}
+        <PaletteCodePreview light={lightPalette} dark={darkPalette} />
       </CardContent>
     </Card>
   )
