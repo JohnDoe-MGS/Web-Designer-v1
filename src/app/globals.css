@@ -1,26 +1,175 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* === Design System Orchestrator Tokens === */
+  --background: #fafafa;
+  --foreground: #18181b;
+  --card: #ffffff;
+  --card-foreground: #18181b;
+  --popover: #ffffff;
+  --popover-foreground: #18181b;
+  --primary: #2563eb;
+  --primary-foreground: #ffffff;
+  --secondary: #f4f4f5;
+  --secondary-foreground: #18181b;
+  --muted: #f4f4f5;
+  --muted-foreground: #71717a;
+  --accent: #f59e0b;
+  --accent-foreground: #18181b;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --border: #e4e4e7;
+  --input: #e4e4e7;
+  --ring: #2563eb;
+  --radius: 0.625rem;
+
+  /* 60-30-10 Rule Defaults */
+  --ds-primary: #f4f4f5;
+  --ds-secondary: #3f3f46;
+  --ds-accent: #2563eb;
+
+  /* Gradient */
+  --gradient-from: #2563eb;
+  --gradient-via: #7c3aed;
+  --gradient-to: #06b6d4;
+
+  /* Font Scale */
+  --font-display: 3.75rem;
+  --font-h1: 2.25rem;
+  --font-h2: 1.5rem;
+  --font-h3: 1.25rem;
+  --font-body: 1rem;
+  --font-small: 0.875rem;
+  --font-caption: 0.75rem;
+}
+
+.dark {
+  --background: #09090b;
+  --foreground: #fafafa;
+  --card: #18181b;
+  --card-foreground: #fafafa;
+  --popover: #18181b;
+  --popover-foreground: #fafafa;
+  --primary: #3b82f6;
+  --primary-foreground: #ffffff;
+  --secondary: #27272a;
+  --secondary-foreground: #fafafa;
+  --muted: #27272a;
+  --muted-foreground: #a1a1aa;
+  --accent: #f59e0b;
+  --accent-foreground: #18181b;
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+  --border: #27272a;
+  --input: #27272a;
+  --ring: #3b82f6;
+
+  --ds-primary: #18181b;
+  --ds-secondary: #a1a1aa;
+  --ds-accent: #3b82f6;
+
+  --gradient-from: #3b82f6;
+  --gradient-via: #8b5cf6;
+  --gradient-to: #06b6d4;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --font-sans: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans, ui-sans-serif, system-ui, sans-serif);
+}
+
+/* Smooth theme transitions */
+*,
+*::before,
+*::after {
+  transition-property: background-color, border-color, color, box-shadow;
+  transition-duration: 300ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Particle canvas layer */
+.particles-container {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Gradient text utility */
+.gradient-text {
+  background: linear-gradient(135deg, var(--gradient-from), var(--gradient-via), var(--gradient-to));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glass morphism card */
+.glass-card {
+  background: color-mix(in srgb, var(--card) 80%, transparent);
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  border: 1px solid color-mix(in srgb, var(--border) 50%, transparent);
+}
+
+/* Glow effect for accent elements */
+.glow-accent {
+  box-shadow: 0 0 20px color-mix(in srgb, var(--primary) 30%, transparent),
+              0 0 60px color-mix(in srgb, var(--primary) 10%, transparent);
+}
+
+/* Color swatch hover lift */
+.swatch-lift {
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+.swatch-lift:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.3);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--muted-foreground);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--foreground);
 }
