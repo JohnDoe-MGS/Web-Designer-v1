@@ -17,6 +17,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { CodeBlock } from "@/components/code-block"
+import { copyToClipboard } from "@/lib/clipboard"
 
 interface AnimationDemo {
   name: string
@@ -221,7 +222,7 @@ function CommandCard({ command, description, tag }: { command: string; descripti
   const [copied, setCopied] = useState(false)
 
   const handleCopy = async () => {
-    await navigator.clipboard.writeText(command)
+    await copyToClipboard(command)
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)
   }

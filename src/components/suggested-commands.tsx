@@ -5,6 +5,7 @@ import { motion } from "framer-motion"
 import { Terminal, Copy, Check, Wand2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import { copyToClipboard } from "@/lib/clipboard"
 
 interface Command {
   command: string
@@ -16,7 +17,7 @@ function CommandItem({ command, description, tag }: Command) {
   const [copied, setCopied] = useState(false)
 
   const handleCopy = async () => {
-    await navigator.clipboard.writeText(command)
+    await copyToClipboard(command)
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)
   }

@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { SuggestedCommands } from "@/components/suggested-commands"
+import { copyToClipboard } from "@/lib/clipboard"
 import type { DesignSystemConfig } from "@/lib/design-tokens"
 import { generateTailwindConfig } from "@/lib/design-tokens"
 
@@ -27,7 +28,7 @@ export function ConfigGenerator({ generateConfig }: ConfigGeneratorProps) {
 
   const handleCopy = useCallback(async () => {
     if (!config) return
-    await navigator.clipboard.writeText(config)
+    await copyToClipboard(config)
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)
   }, [config])
@@ -35,7 +36,7 @@ export function ConfigGenerator({ generateConfig }: ConfigGeneratorProps) {
   const handleCopyCommand = useCallback(async () => {
     if (!config) return
     const parsed = JSON.parse(config)
-    await navigator.clipboard.writeText(parsed.claudeCodeCommand || "")
+    await copyToClipboard(parsed.claudeCodeCommand || "")
     setCopiedCommand(true)
     setTimeout(() => setCopiedCommand(false), 2000)
   }, [config])

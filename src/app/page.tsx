@@ -16,6 +16,7 @@ import { ContrastChecker } from "@/components/contrast-checker"
 import { ConfigGenerator } from "@/components/config-generator"
 import { ManifestoPage } from "@/components/manifesto-page"
 import { AnimationsPage } from "@/components/animations-page"
+import { PromptGeneratorPage } from "@/components/prompt-generator-page"
 import { useDesignSystem } from "@/hooks/use-design-system"
 
 export default function HomePage() {
@@ -93,6 +94,7 @@ export default function HomePage() {
                   <TabsTrigger value="config">Config</TabsTrigger>
                   <TabsTrigger value="manifesto">Manifesto</TabsTrigger>
                   <TabsTrigger value="animacoes">Animações</TabsTrigger>
+                  <TabsTrigger value="prompt">Prompt</TabsTrigger>
                 </TabsList>
               </div>
             </div>
@@ -193,6 +195,22 @@ export default function HomePage() {
                 transition={{ duration: 0.4 }}
               >
                 <AnimationsPage />
+              </motion.div>
+            </TabsContent>
+
+            <TabsContent value="prompt">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4 }}
+              >
+                <PromptGeneratorPage
+                  lightPalette={ds.lightPalette}
+                  darkPalette={ds.darkPalette}
+                  gradient={ds.gradient}
+                  fontScale={ds.fontScale}
+                  fontFamily={ds.fontFamily}
+                />
               </motion.div>
             </TabsContent>
           </Tabs>

@@ -4,6 +4,7 @@ import { useState, useCallback } from "react"
 import { motion } from "framer-motion"
 import { Copy, Check, ChevronDown, ChevronUp } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { copyToClipboard } from "@/lib/clipboard"
 
 interface CodeBlockProps {
   code: string
@@ -24,7 +25,7 @@ export function CodeBlock({
   const [open, setOpen] = useState(defaultOpen)
 
   const handleCopy = useCallback(async () => {
-    await navigator.clipboard.writeText(code)
+    await copyToClipboard(code)
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)
   }, [code])
