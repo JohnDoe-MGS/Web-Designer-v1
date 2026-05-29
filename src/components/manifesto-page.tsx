@@ -16,6 +16,12 @@ import {
   Target,
   Code2,
   Lightbulb,
+  Brain,
+  Puzzle,
+  Bot,
+  Plug,
+  Command,
+  Webhook,
 } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -120,6 +126,45 @@ const principles = [
     title: "Versionamento de Design",
     description:
       "O JSON exportado pode ser versionado junto ao código no Git. Isso cria um histórico rastreável de decisões de design — quando a paleta mudou, por que o acento foi alterado, quem aprovou a nova escala tipográfica.",
+  },
+]
+
+const claudeFeatures = [
+  {
+    icon: Brain,
+    title: "Memória CLAUDE.md",
+    description:
+      "O design system vive no arquivo CLAUDE.md do projeto. O Claude Code carrega esses tokens como contexto em toda sessão, aplicando cores, tipografia e regras automaticamente — sem precisar recolar o prompt a cada vez.",
+  },
+  {
+    icon: Puzzle,
+    title: "Skills",
+    description:
+      "Empacote a aplicação e a auditoria do design system em uma Skill (.claude/skills/) reutilizável. Uma vez criada, ela é acionada sob demanda em qualquer projeto, levando consigo as instruções e os tokens do Orchestrator.",
+  },
+  {
+    icon: Bot,
+    title: "Subagentes",
+    description:
+      "Um subagente revisor (.claude/agents/) audita contraste WCAG AA e cores hardcoded em paralelo, isolando a verificação do contexto principal. Ideal para validar conformidade sem interromper o fluxo de desenvolvimento.",
+  },
+  {
+    icon: Plug,
+    title: "MCP Servers",
+    description:
+      "Conecte servidores MCP — como shadcn/ui ou Figma — para gerar componentes já alinhados aos tokens do design system. O Claude Code combina o contexto do MCP com as regras do Orchestrator.",
+  },
+  {
+    icon: Command,
+    title: "Slash Commands",
+    description:
+      "Crie comandos como /aplicar-ds e /auditar-ds em .claude/commands/ para acionar os fluxos do design system com um atalho. Reutilizáveis por toda a equipe e versionados junto ao código.",
+  },
+  {
+    icon: Webhook,
+    title: "Hooks",
+    description:
+      "Hooks em .claude/settings.json executam validações automáticas — contraste, tokens não utilizados, cores hardcoded — a cada edição de arquivos de estilo, garantindo que o design system nunca saia de conformidade.",
   },
 ]
 
@@ -385,6 +430,51 @@ export function ManifestoPage() {
         </Card>
       </motion.div>
 
+      {/* Claude Code Modern Features */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.52, duration: 0.4 }}
+      >
+        <Card className="glass-card">
+          <CardHeader className="pb-3">
+            <CardTitle className="flex items-center gap-2 text-lg">
+              <Terminal className="h-5 w-5 text-primary" />
+              Claude Code — Recursos Modernos
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              O Claude Code evoluiu muito além do comando único no terminal. Hoje o design system
+              pode ser <strong className="text-foreground">persistido, empacotado e automatizado</strong> —
+              deixando de ser um prompt avulso para virar parte permanente do fluxo de trabalho do projeto.
+            </p>
+            <div className="grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+              {claudeFeatures.map((f, i) => (
+                <motion.div
+                  key={f.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.54 + i * 0.06, duration: 0.4 }}
+                >
+                  <div className="flex gap-3 rounded-lg border border-border/50 bg-card/50 p-3 sm:p-4 h-full">
+                    <div className="flex h-8 w-8 sm:h-9 sm:w-9 shrink-0 items-center justify-center rounded-lg bg-secondary">
+                      <f.icon className="h-4 w-4 text-primary" />
+                    </div>
+                    <div className="space-y-1 min-w-0">
+                      <h3 className="text-sm font-semibold text-foreground">{f.title}</h3>
+                      <p className="text-[11px] leading-relaxed text-muted-foreground">
+                        {f.description}
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      </motion.div>
+
       {/* Technology Stack */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -408,7 +498,7 @@ export function ManifestoPage() {
                 { name: "next-themes", desc: "Troca de tema claro/escuro com transições suaves" },
                 { name: "tsparticles", desc: "Background interativo com partículas responsivas" },
                 { name: "Montserrat", desc: "Família tipográfica com 7 pesos (300–900)" },
-                { name: "Claude Code", desc: "CLI que aplica configurações do Orchestrator ao projeto" },
+                { name: "Claude Code", desc: "Agente com memória CLAUDE.md, Skills, Subagentes, MCP e Hooks" },
                 { name: "Vercel", desc: "Deploy contínuo com preview por branch" },
               ].map((tech, i) => (
                 <motion.div
@@ -443,6 +533,21 @@ export function ManifestoPage() {
             command: 'claude "Implemente o padrão de tokens CSS com variáveis :root e .dark conforme a arquitetura do Design System Orchestrator"',
             description: "Configura a arquitetura de tokens do zero",
             tag: "Tokens",
+          },
+          {
+            command: 'claude "Salve a configuração do Design System Orchestrator no CLAUDE.md do projeto para que os tokens sejam carregados como memória em todas as sessões futuras"',
+            description: "Persiste o design system na memória do projeto",
+            tag: "CLAUDE.md",
+          },
+          {
+            command: 'claude "Crie uma Skill em .claude/skills/design-system/SKILL.md que aplica e audita o design system, mais um slash command /aplicar-ds em .claude/commands/"',
+            description: "Empacota o design system como Skill + slash command",
+            tag: "Skill",
+          },
+          {
+            command: 'claude "Configure um hook em .claude/settings.json que valida contraste WCAG e detecta cores hardcoded sempre que um arquivo .css ou .tsx for editado"',
+            description: "Automatiza validação de acessibilidade via Hooks",
+            tag: "Hooks",
           },
           {
             command: 'claude "Integre o Design System Orchestrator com CI/CD: adicione validação de contraste WCAG no pipeline de build"',

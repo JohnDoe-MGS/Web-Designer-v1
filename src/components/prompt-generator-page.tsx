@@ -95,10 +95,18 @@ function buildPrompt(
 
 ## Implementação
 - Usar CSS custom properties (:root e .dark) como fonte única de verdade
-- Tailwind CSS consumindo variáveis via var()
+- Tailwind CSS v4 consumindo variáveis via var() e @theme inline
 - Componentes shadcn/ui com os tokens aplicados
 - next-themes para troca suave de tema claro/escuro
 - Manter a proporção 60-30-10 em todas as seções da interface
+
+## Integração com Claude Code (recursos atuais)
+- Persista este Design System no arquivo CLAUDE.md (memória do projeto), assim o Claude Code aplica os tokens automaticamente em toda sessão futura sem precisar recolar o prompt
+- Crie uma Skill reutilizável em .claude/skills/design-system/SKILL.md para reaplicar ou auditar o sistema sob demanda em qualquer projeto
+- Salve um slash command em .claude/commands/aplicar-ds.md para acionar a aplicação do design system com um atalho
+- Conecte o MCP do shadcn/ui para gerar componentes já alinhados a estes tokens
+- Use um subagente de revisão (.claude/agents/) para auditar contraste WCAG AA e cores hardcoded antes de cada commit
+- Configure um hook em .claude/settings.json para validar acessibilidade automaticamente ao editar arquivos de estilo
 
 Seja criativo na aplicação desses tokens — o objetivo é uma interface premium, moderna e coesa. Use as cores e tipografia como guia mas sinta-se livre para criar layouts interessantes, micro-interações sutis e composições visuais que elevem a experiência do usuário.`
 }
@@ -319,6 +327,16 @@ export function PromptGeneratorPage({
             tag: "Full Setup",
           },
           {
+            command: 'claude "Salve este Design System no meu CLAUDE.md como memória do projeto, para que você aplique os tokens automaticamente em todas as sessões futuras"',
+            description: "Persiste o design system na memória do projeto",
+            tag: "CLAUDE.md",
+          },
+          {
+            command: 'claude "Crie uma Skill em .claude/skills/design-system/SKILL.md que reaplica e audita este design system sob demanda em qualquer projeto"',
+            description: "Transforma o design system em Skill reutilizável",
+            tag: "Skill",
+          },
+          {
             command: 'claude "Aplique apenas as cores do prompt (regra 60-30-10) no meu projeto, criando CSS variables em globals.css e atualizando tailwind.config"',
             description: "Aplica somente a paleta de cores",
             tag: "Cores",
@@ -329,9 +347,9 @@ export function PromptGeneratorPage({
             tag: "Motion",
           },
           {
-            command: 'claude "Audite meu projeto comparando com o design system do prompt e liste todas as divergências encontradas"',
-            description: "Verifica conformidade com o design system",
-            tag: "Auditoria",
+            command: 'claude "Crie um subagente de revisão em .claude/agents/ que audita contraste WCAG AA e cores hardcoded comparando com o design system do prompt"',
+            description: "Cria subagente auditor de acessibilidade",
+            tag: "Subagente",
           },
         ]} />
       </motion.div>
